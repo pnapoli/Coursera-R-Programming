@@ -1,0 +1,133 @@
+# Question 1 
+> ?iris
+> dni3 <- dimnames(iris3)
+> ii <- data.frame(matrix(aperm(iris3, c(1,3,2)), ncol = 4,
++                         dimnames = list(NULL, sub(" L.",".Length",
++                                                   sub(" W.",".Width", dni3[[2]])))),
++                  Species = gl(3, 50, labels = sub("S", "s", sub("V", "v", dni3[[3]]))))
+> all.equal(ii, iris) # TRUE
+# [1] TRUE
+> ?iris
+> str(iris)
+# 'data.frame':	150 obs. of  5 variables:
+# $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+# $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+# $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+# $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+# $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
+> head(iris)
+#  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+# 1          5.1         3.5          1.4         0.2  setosa
+# 2          4.9         3.0          1.4         0.2  setosa
+# 3          4.7         3.2          1.3         0.2  setosa
+# 4          4.6         3.1          1.5         0.2  setosa
+# 5          5.0         3.6          1.4         0.2  setosa
+# 6          5.4         3.9          1.7         0.4  setosa
+> virginica<-subset(iris,Species == 'virginica')
+> 
+> sl<-data.frame(virginica$Sepal.Length)
+> 
+> sl<-data.frame(iris$Sepal.Length[iris$Species=="virginica"])
+> sl
+#   iris.Sepal.Length.iris.Species.....virginica..
+# 1                                             6.3
+# 2                                             5.8
+# 3                                             7.1
+# 4                                             6.3
+# 5                                             6.5
+# 6                                             7.6
+# 7                                             4.9
+# 8                                             7.3
+# 9                                             6.7
+# 10                                            7.2
+# 11                                            6.5
+# 12                                            6.4
+# 13                                            6.8
+# 14                                            5.7
+# 15                                            5.8
+# 16                                            6.4
+# 17                                            6.5
+# 18                                            7.7
+# 19                                            7.7
+# 20                                            6.0
+# 21                                            6.9
+# 22                                            5.6
+# 23                                            7.7
+# 24                                            6.3
+# 25                                            6.7
+# 26                                            7.2
+# 27                                            6.2
+# 28                                            6.1
+# 29                                            6.4
+# 30                                            7.2
+# 31                                            7.4
+# 32                                            7.9
+# 33                                            6.4
+# 34                                            6.3
+# 35                                            6.1
+# 36                                            7.7
+# 37                                            6.3
+# 38                                            6.4
+# 39                                            6.0
+# 40                                            6.9
+# 41                                            6.7
+# 42                                            6.9
+# 43                                            5.8
+# 44                                            6.8
+# 45                                            6.7
+# 46                                            6.7
+# 47                                            6.3
+# 48                                            6.5
+# 49                                            6.2
+# 50                                            5.9
+> summary(sl)
+# iris.Sepal.Length.iris.Species.....virginica..
+# Min.   :4.900                                 
+# 1st Qu.:6.225                                 
+# Median :6.500                                 
+# Mean   :6.588                                 
+# 3rd Qu.:6.900                                 
+# Max.   :7.900  
+
+# Answer: Mean   :6.588 
+
+# Question 2
+apply(iris[, 1:4], 2, mean)
+# Answer
+# Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+#   5.843333     3.057333     3.758000     1.199333 
+
+# Question 3
+# Load the 'mtcars' dataset in R with the following code
+library(datasets)
+data(mtcars)
+
+# There will be an object names 'mtcars' in your workspace. You can find some information about the dataset by running
+?mtcars
+str(mtcars)
+head(mtcars)
+# How can one calculate the average miles per gallon (mpg) by number of cylinders in the car (cyl)? Select all that apply.
+Anwswers
+sapply(split(mtcars$mpg, mtcars$cyl), mean)
+# 4        6        8 
+# 26.66364 19.74286 15.10000
+with(mtcars, tapply(mpg, cyl, mean))
+#       4        6        8 
+# 26.66364 19.74286 15.10000 
+
+# Question 4
+# Continuing with the 'mtcars' dataset from the previous Question, what is the absolute difference between the average horsepower of 4-cylinder cars and the average horsepower of 8-cylinder cars?
+
+abs(mean(split(mtcars, mtcars$cyl)$'4'$hp) - mean(split(mtcars, mtcars$cyl)$'8'$hp))
+# 126.5779
+
+
+# Question 5
+# If you run 
+debug(ls)
+
+#what happens when you next call the 'ls' function?
+debug(ls)
+ls()
+
+# Answer: Execution of 'ls' will suspend at the beginning of the function and you will be in the browser. 
